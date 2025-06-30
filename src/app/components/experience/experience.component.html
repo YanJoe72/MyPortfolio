@@ -1,0 +1,63 @@
+<div class="experience-container">
+    <div class="container">
+      <h1>Mon Expérience</h1>
+      <p class="subtitle">Mon parcours professionnel en développement web</p>
+      
+      <div class="timeline">
+        <div class="timeline-item" *ngFor="let exp of experiences; let i = index" (click)="openModal(exp)">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line" *ngIf="i < experiences.length - 1"></div>
+          </div>
+          <div class="timeline-content">
+            <div class="experience-card">
+              <div class="experience-header">
+                <h3>{{ exp.position }}</h3>
+                <span class="duration">{{ exp.duration }}</span>
+              </div>
+              <div class="company-info">
+                <h4>{{ exp.company }}</h4>
+                <span class="location">{{ exp.location }}</span>
+              </div>
+              <p class="description">{{ exp.description }}</p>
+              <div class="technologies">
+                <span class="tech-tag" *ngFor="let tech of exp.technologies.slice(0, 4)">{{ tech }}</span>
+                <span class="more-tech" *ngIf="exp.technologies.length > 4">+{{ exp.technologies.length - 4 }}</span>
+              </div>
+              <button class="details-btn">Voir plus de détails</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-modal [isOpen]="isModalOpen" [title]="selectedExperience?.position || ''" (close)="closeModal()">
+    <div *ngIf="selectedExperience" class="modal-experience-content">
+      <div class="modal-header-info">
+        <div class="company-details">
+          <h4>{{ selectedExperience.company }}</h4>
+          <span class="location">{{ selectedExperience.location }}</span>
+          <span class="duration">{{ selectedExperience.duration }}</span>
+        </div>
+      </div>
+      
+      <div class="modal-description">
+        <p>{{ selectedExperience.detailedDescription }}</p>
+      </div>
+      
+      <div class="modal-section">
+        <h5>Technologies utilisées :</h5>
+        <div class="modal-technologies">
+          <span class="tech-tag" *ngFor="let tech of selectedExperience.technologies">{{ tech }}</span>
+        </div>
+      </div>
+      
+      <div class="modal-section">
+        <h5>Réalisations clés :</h5>
+        <ul class="achievements-list">
+          <li *ngFor="let achievement of selectedExperience.achievements">{{ achievement }}</li>
+        </ul>
+      </div>
+    </div>
+  </app-modal>

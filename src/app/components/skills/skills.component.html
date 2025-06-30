@@ -1,0 +1,18 @@
+<div class="skills-container">
+    <div class="container">
+      <h1>Mes Compétences</h1>
+      <p class="subtitle">Technologies et outils que je maîtrise</p>
+      
+      <div class="skills-categories">
+        <div class="category" *ngFor="let category of categories">
+          <h3>{{ category }}</h3>
+          <div class="skills-grid">
+            <div class="skill-item" *ngFor="let skill of getSkillsByCategory(category)">
+              <span class="skill-name">{{ skill.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`
